@@ -28,6 +28,26 @@ class EventRepository extends ServiceEntityRepository
                     ->getResult();
     }
 
+    public function findNextsEvents($limit = null){
+        return $this->createQueryBuilder('e')
+                    ->select('e')
+                    ->orderBy('e.date','ASC')
+                    ->setMaxResults($limit)
+                    ->getQuery()
+                    ->getResult();
+    }
+
+    public function findNextsEventsByType($type, $limit = null){
+        return $this->createQueryBuilder('e')
+                    ->select('e')
+                    ->where('e.type = :type')
+                    ->orderBy('e.date','ASC')
+                    ->setParameter('type', $type)
+                    ->setMaxResults($limit)
+                    ->getQuery()
+                    ->getResult();
+    }
+
     // /**
     //  * @return Event[] Returns an array of Event objects
     //  */

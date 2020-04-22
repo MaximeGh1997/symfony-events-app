@@ -39,16 +39,38 @@ class AppFixtures extends Fixture
         for($i = 1; $i<=10; $i++){
             $event = new Event();
             $slug = $slugify->slugify($faker->md5());
+            $names = [
+                'DRAKE EUROPEAN TOUR 2020',
+                'LES ARDENTES 2020',
+                'AVANT PREMIERE BAD BOYS FOR LIFE',
+                'UEFA EURO 2020: BELGIQUE-RUSSIE',
+                'PABLO ANDRES: THE WORLD OF PABLO '
+            ];
+            $types = [
+                'Concert',
+                'Festival',
+                'Cinéma',
+                'Sport',
+                'Spectacle'
+            ];
+            $places = [
+                'ANTWERP SPORTPALEIS',
+                'ESPLANADE LIEGE',
+                'KINEPOLIS IMAGIBRAINE',
+                'STADE ROI BAUDOUIN',
+                'FOREST NATIONAL'
+            ];
             $createdAt = new \DateTime();
 
-            $event->setName('DRAKE EUROPEAN TOUR 2020')
-                ->setType('Concert')
-                ->setPlace('FOREST NATIONAL')
+            $event->setName($names[mt_rand(0,4)])
+                ->setType($types[mt_rand(0,4)])
+                ->setPlace($places[mt_rand(0,4)])
                 ->setDate($faker->dateTimeBetween('+2 months', '+6 months'))
                 ->setDescription($faker->paragraph())
-                ->setPrice('79')
+                ->setPrice($faker->numberBetween($min=25, $max=79))
                 ->setCover('http://www.placehold.it/1000x350')
-                ->setSlug($slug);
+                ->setSlug($slug)
+                ->setCreatedAt($createdAt);
             
             $manager->persist($event);    
         }
