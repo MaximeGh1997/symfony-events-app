@@ -28,11 +28,6 @@ class Event
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $type;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $place;
 
     /**
@@ -71,6 +66,12 @@ class Event
     private $createdAt;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Types", inversedBy="Event")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $type;
+
+    /**
      * @ORM\PrePersist
      * @ORM\PreUpdate
      */
@@ -98,18 +99,6 @@ class Event
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getType(): ?string
-    {
-        return $this->type;
-    }
-
-    public function setType(string $type): self
-    {
-        $this->type = $type;
 
         return $this;
     }
@@ -225,6 +214,18 @@ class Event
     public function setCreatedAt(?\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getType(): ?Types
+    {
+        return $this->type;
+    }
+
+    public function setType(?Types $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }

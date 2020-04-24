@@ -19,6 +19,7 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
+    // fonction pour récupérer les derniers événement ajouté sur le site
     public function findLastsAddEvents($limit = null){
         return $this->createQueryBuilder('e')
                     ->select('e')
@@ -28,6 +29,7 @@ class EventRepository extends ServiceEntityRepository
                     ->getResult();
     }
 
+    // fonction pour récupérer les prochains événements qui auront lieu
     public function findNextsEvents($limit = null){
         return $this->createQueryBuilder('e')
                     ->select('e')
@@ -37,6 +39,7 @@ class EventRepository extends ServiceEntityRepository
                     ->getResult();
     }
 
+    // fonction pour récupérer les prochains événements qui auront lieu + filtrer par type
     public function findNextsEventsByType($type, $limit = null){
         return $this->createQueryBuilder('e')
                     ->select('e')

@@ -7,21 +7,23 @@
         <h1 class="display-3">Bienvenue sur SymEvents</h1>
         <p class="lead">SymEvents rassemble les plus grands événements organisés en Belgique</p>
         <hr class="my-4">
-        <p>Consultez le calendrier et achetez vos places dès maintenant !</p>
+        <p>Consultez l'agenda et achetez vos places dès maintenant !</p>
         <p class="lead">
-            <a class="btn btn-primary btn-lg" href="#" role="button">En savoir plus</a>
+            <a class="btn btn-primary btn-lg" href="{{path('agenda')}}" role="button">En savoir plus</a>
         </p>
     </div>
     <div class="container">
         <h3>Les derniers événements ajoutés...</h3>
         {% for event in events %}
         <div class="row">
-            <div class="card mb-3 col-10 offset-1">
-                <img class="card-img-top" src="{{event.cover}}" alt="Card image cap">
+            <div class="card w-100 mt-3 mb-3">
+                <img class="card-img-top coverimg" src="{{event.cover}}" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">{{event.name}}</h5>
+                    <h5><strong>{{event.name}}</strong>, le {{event.date | date('d/m/Y')}} à {{event.date | date('H')}}h{{event.date | date('i')}}</h5>
+                    <p>{{event.place}}</p>
                     <p class="card-text">{{event.description}}</p>
-                    <p class="card-text"><small class="text-muted">{{event.price}}</small></p>
+                    <p class="card-text">à partir de {{event.price}}€</p>
+                    <p class="card-text"><small class="text-muted">#{{event.type.title}}</small></p>
                 </div>
             </div>
         </div>
