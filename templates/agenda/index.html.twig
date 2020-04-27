@@ -14,6 +14,7 @@
         <h4>Voici les prochains événements à venir</h4>
 
         {% for event in events %}
+        {% if (event.date > now) or (event.date == now) %}
         <div class="row">
             <div class="card w-100 mt-3 mb-3">
                 <img class="card-img-top coverimg" src="{{event.cover}}" alt="Card image cap">
@@ -26,6 +27,7 @@
                 </div>
             </div>
         </div>
+        {% endif %}
         {% endfor %}
     </div>
 {% endblock %}

@@ -17,11 +17,11 @@ class SelectTypesType extends AbstractType
                 'label' => 'Selectionnez un type d\'événement',
                 'choices' => [
                     'Tous' => null,
-                    'Concert' => 16,
-                    'Festival' => 17,
-                    'Cinéma' => 18,
-                    'Sport' => 19,
-                    'Spectacle' => 20
+                    'Concert' => 21,
+                    'Festival' => 22,
+                    'Cinéma' => 23,
+                    'Sport' => 24,
+                    'Spectacle' => 25
                 ]
             ])
         ;

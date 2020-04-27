@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\Types;
 use App\Form\SelectTypesType;
 use App\Repository\EventRepository;
@@ -18,7 +19,8 @@ class AgendaController extends AbstractController
      */
     public function index(Request $request, EventRepository $eventRepo, TypesRepository $typesRepo)
     {
-        $events = $eventRepo->findNextsEvents();
+        $events = $eventRepo->findEventsByDate();
+        $now = new \DateTime();
 
         $types = new Types();
         $form = $this->createForm(SelectTypesType::class, $types);
@@ -28,13 +30,14 @@ class AgendaController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $typeId = $types->getTitle(); // récupération du chiffre correspondant au titre du type
             if($typeId != null){
-                $events = $eventRepo->findNextsEventsByType($typeId);
+                $events = $eventRepo->findEventsByDateAndType($typeId);
             }
         }
 
         return $this->render('agenda/index.html.twig', [
             'events' => $events,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'now' => $now
         ]);
     }
 }

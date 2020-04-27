@@ -1,3 +1,7 @@
+html, body{
+    height: 100%;
+}
+
 .coverimg{
     height: 300px;
     width: 100%;

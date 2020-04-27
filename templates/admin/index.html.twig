@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="mt-3 mb-3">Administration du site</h1>
+        <button type="button" class="btn btn-success mb-3">Ajouter un événement</button>
+        <a href="{{ path('admin_logout') }}"><button type="button" class="btn btn-primary mb-3">Se déconnecter</button></a>
+        <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Lieu</th>
+                <th scope="col">Date</th>
+                <th scope="col">Date d'ajout</th>
+                <th scope="col">Prix</th>
+                <th scope="col">Type</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in events %}
+            <tr>
+                <td scope="row">{{event.id}}</td>
+                <td>{{event.name}}</td>
+                <td>{{event.place}}</td>
+                <td>{{event.date | date('d/m/Y')}}</td>
+                <td>{{event.createdAt | date('d/m/Y')}} {{event.createdAt | date('H:i')}}</td>
+                <td>{{event.price}}€</td>
+                <td>{{event.type.title}}</td>
+                <td class="text-align-center">
+                    <a href="#" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                    <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table> 
+    </div>
+{% endblock %}

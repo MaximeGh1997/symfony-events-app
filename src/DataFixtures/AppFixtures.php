@@ -90,7 +90,7 @@ class AppFixtures extends Fixture
 
             $event->setName($names[mt_rand(0,4)])
                 ->setPlace($places[mt_rand(0,4)])
-                ->setDate($faker->dateTimeBetween('+20 days', '+6 months'))
+                ->setDate($faker->dateTimeBetween('-2 months', '+4 months'))
                 ->setDescription($faker->paragraph())
                 ->setPrice($faker->numberBetween($min=25, $max=79))
                 ->setCover('http://www.placehold.it/1000x350')

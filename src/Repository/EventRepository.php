@@ -30,7 +30,7 @@ class EventRepository extends ServiceEntityRepository
     }
 
     // fonction pour récupérer les prochains événements qui auront lieu
-    public function findNextsEvents($limit = null){
+    public function findEventsByDate($limit = null){
         return $this->createQueryBuilder('e')
                     ->select('e')
                     ->orderBy('e.date','ASC')
@@ -40,7 +40,7 @@ class EventRepository extends ServiceEntityRepository
     }
 
     // fonction pour récupérer les prochains événements qui auront lieu + filtrer par type
-    public function findNextsEventsByType($type, $limit = null){
+    public function findEventsByDateAndType($type, $limit = null){
         return $this->createQueryBuilder('e')
                     ->select('e')
                     ->where('e.type = :type')
