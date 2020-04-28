@@ -29,6 +29,7 @@ class AgendaController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()){
             $typeId = $types->getTitle(); // récupération du chiffre correspondant au titre du type
+            
             if($typeId != null){
                 $events = $eventRepo->findEventsByDateAndType($typeId);
             }

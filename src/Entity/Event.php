@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use DateTime;
+use Faker\Factory;
 use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
@@ -10,6 +11,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Event
 {
@@ -72,13 +74,33 @@ class Event
     private $type;
 
     /**
+     * Permet d'intialiser la date de création
+     * 
      * @ORM\PrePersist
      * @ORM\PreUpdate
      */
-    public function prePersist(){
+    public function initializeCreatedAt(){
         if(empty($this->createdAt)){
             $this->createdAt = new \DateTime();
         }
+    }
+
+    /**
+     * Permet d'intialiser le slug
+     *
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     * 
+     * @return void
+     */
+    public function initializeSlug(){
+        $faker = Factory::create('FR-fr');
+        
+        if(empty($this->slug)){
+            $slugify = new Slugify();
+            $this->slug = $slugify->slugify($faker->md5());
+        }
+
     }
 
     public function __construct()
