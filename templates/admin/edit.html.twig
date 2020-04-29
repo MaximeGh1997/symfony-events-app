@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Modification de l'événement {{event.name}}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h3 class="mt-3 mb-3">Modification de l'événement <strong>{{event.name}}</strong> du <strong>{{event.date | date('d/m/Y')}} à {{event.date | date('H')}}h{{event.date | date('i')}}</strong></h3>
+    {{form_start(form)}}
+        {{form_widget(form)}}
+        <button type="submit" class="mb-3 btn btn-warning">Modifier l'événement</button>
+    {{form_end(form)}}
+</div>
+{% endblock %}

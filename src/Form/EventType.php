@@ -43,9 +43,6 @@ class EventType extends AbstractType
             ->add('description', TextareaType::class, $this->getConfiguration('Description de l\'événement'))
             ->add('price', MoneyType::class, $this->getConfiguration('Prix de l\'événement'))
             ->add('cover', UrlType::class, $this->getConfiguration('Image de couverture'))
-            ->add('slug', TextType::class, $this->getConfiguration('Adresse web (automatique)',[
-                'required' => false
-            ]))
             ->add('type', EntityType::class, [
                 'class' => Types::class,
                 'choice_label' => 'title'

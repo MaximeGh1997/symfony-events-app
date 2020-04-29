@@ -20,7 +20,7 @@ class AgendaController extends AbstractController
     public function index(Request $request, EventRepository $eventRepo, TypesRepository $typesRepo)
     {
         $events = $eventRepo->findEventsByDate();
-        $now = new \DateTime();
+        $now = new \DateTime('Europe/Brussels');
 
         $types = new Types();
         $form = $this->createForm(SelectTypesType::class, $types);

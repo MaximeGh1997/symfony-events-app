@@ -81,7 +81,7 @@ class Event
      */
     public function initializeCreatedAt(){
         if(empty($this->createdAt)){
-            $this->createdAt = new \DateTime();
+            $this->createdAt = new \DateTime('Europe/Brussels');
         }
     }
 
