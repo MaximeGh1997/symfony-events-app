@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use DateTime;
 use App\Entity\Types;
-use App\Form\SelectTypesType;
 use App\Repository\EventRepository;
 use App\Repository\TypesRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,23 +21,15 @@ class AgendaController extends AbstractController
         $events = $eventRepo->findEventsByDate();
         $now = new \DateTime('Europe/Brussels');
 
-        $types = new Types();
-        $form = $this->createForm(SelectTypesType::class, $types);
-
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()){
-            $typeId = $types->getTitle(); // récupération du chiffre correspondant au titre du type
-            
-            if($typeId != null){
-                $events = $eventRepo->findEventsByDateAndType($typeId);
-            }
+        $typeId = $request->request->get('type'); // récupération de l'id correspondant au type
+        if($typeId != null){
+            $events = $eventRepo->findEventsByDateAndType($typeId);
         }
 
         return $this->render('agenda/index.html.twig', [
             'events' => $events,
-            'form' => $form->createView(),
-            'now' => $now
+            'now' => $now,
+            'types' => $typesRepo->findAll()
         ]);
     }
 }
